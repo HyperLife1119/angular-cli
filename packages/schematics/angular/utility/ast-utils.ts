@@ -56,7 +56,7 @@ export function insertImport(
     // insert import if it's not there
     if (!imports.some((node) => (node.propertyName || node.name).text === symbolName)) {
       const fallbackPos =
-        findNodes(relevantImports[0], ts.SyntaxKind.CloseBraceToken)[0].getStart() ||
+        findNodes(relevantImports[0], ts.SyntaxKind.CloseBraceToken)[0]?.getStart() ||
         findNodes(relevantImports[0], ts.SyntaxKind.FromKeyword)[0].getStart();
 
       return insertAfterLastOccurrence(imports, `, ${importExpression}`, fileToEdit, fallbackPos);
