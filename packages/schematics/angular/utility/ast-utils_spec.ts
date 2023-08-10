@@ -768,6 +768,15 @@ describe('ast utils', () => {
       expect(result).toBe(`import core from '@angular/core';`);
     });
 
+    it('should insert a new default import into a file (2)', () => {
+      const fileContent = '';
+      const source = getTsSource(filePath, fileContent);
+      const change = insertImport(source, filePath, 'http', '@angular/common/http', true);
+      const result = applyChanges(filePath, fileContent, [change]).trim();
+
+      expect(result).toBe(`import http from '@angular/common/http';`);
+    });
+
     it('should not insert an import if there is a namespace import', () => {
       const fileContent = `import * as foo from '@angular/core';`;
       const source = getTsSource(filePath, fileContent);
